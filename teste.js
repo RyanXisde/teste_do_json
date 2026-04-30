@@ -62,3 +62,19 @@ function busca_adm() {
         lugar.appendChild(linha);
     });
 }
+
+function cafe() {
+   fetch('dados.json')
+   .then(response=> response.json())
+   .then(dadinho =>{
+     document.getElementById('destino').innerHTML =
+     `<div class="card">
+     <img src="img/`+dadinho.imagem+`" alt="">
+     <h3>`+dadinho.nome+`</h3>
+     <p>` +dadinho.descricao+`</p>
+     <a href="`+dadinho.endereco+`">
+         <button type="button">Saiba Mais</button>
+       </a>
+    </div>`;
+   })
+}
