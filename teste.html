@@ -1,34 +1,47 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informações Sobre</title>
+    <title>Cafés</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>Área de Testes</h1>
-    <div id="destino"></div>
-    
-    <button type="button" onclick="cafe()">Carregar</button>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Idade</th>
-                    <th>Peso</th>
-                    <th>Personalidade</th>
-                    <th>Server</th>
-                    <th>Habilidade</th>
-                    <th>Membros</th>
-                </tr>
-            </thead>
-            <tbody id="lugar"></tbody>
-        </table>
-        <button type="button" onclick="busca_adm()">Buscar Informações</button>
+<body onload="cafe()">
+
+    <div id="destino">
+
+        <div class="card">
+            <img src="img/cafe1.jpg" alt="Café 1">
+
+            <div class="conteudo">
+                <h3>Café Especial</h3>
+
+                <p>
+                    Café muito bom com ambiente confortável.
+                </p>
+
+                <button>Saiba mais</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="img/cafe2.jpg" alt="Café 2">
+
+            <div class="conteudo">
+                <h3>Café Premium</h3>
+
+                <p>
+                    Lugar bonito para tomar café com amigos.
+                </p>
+
+                <button>Saiba mais</button>
+            </div>
+        </div>
+
     </div>
-    
-    <script src="teste.js"></script>
+
+    <script src="script.js"></script>
+
 </body>
 </html>

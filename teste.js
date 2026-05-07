@@ -1,80 +1,32 @@
-function busca_adm() {
-    const dados = [
-        {
-            "nome": "Kcb",
-            "idade": "16",
-            "peso": "250kg",
-            "personalidade": "Fofo e esforçado, mas um tanto quanto incoveninente as vezes. Muito legal.",
-            "associado": {
-                "server": "Veyarticos",
-                "habilidade": "Coordenação",
-                "membros": 600067
-            }
-        },
-        {
-            "nome": "TutuZ",
-            "idade": "16",
-            "peso": "70kg",
-            "personalidade": "Mal humorado, interesseiro. Vê beneficios acima da amizade.",
-            "associado": {
-                "server": "K11NG",
-                "habilidade": "Administração",
-                "membros": 420000
-            }
-        },
-        {
-            "nome": "Angel",
-            "idade": "16",
-            "peso": "30kg",
-            "personalidade": "Fofifnha kwai, super simpatica e inteligente s2",
-            "associado": {
-                "server": "K11NG",
-                "habilidade": "Todas",
-                "membros": 867420
-            }
-        },
-        {
-            "nome": "Sainty",
-            "idade": "8",
-            "peso": "500kg",
-            "personalidade": "Agudada, bebe mal humorada e estressada",
-            "associado": {
-                "server": "Desempregada",
-                "habilidade": "Nenhuma",
-                "membros": 0
-            }
-        }
-    ];
+async function cafe(){
+    const destino = document.getElementById('destino')
+    try {
+        const response = await fetch('dados.json');
+        if (!response.ok) throw new Error('Falha ao carregar dadow');
+        const cafes = await response. json();
 
-    const lugar = document.getElementById('lugar');
-    lugar.innerHTML = "";
-    dados.forEach(pessoa => {
-        const linha = document.createElement('tr');
-        linha.innerHTML = `
-            <td>${pessoa.nome}</td>
-            <td>${pessoa.idade}</td>
-            <td>${pessoa.peso}</td>
-            <td>${pessoa.personalidade}</td>
-            <td>${pessoa.associado.server}</td>
-            <td>${pessoa.associado.habilidade}</td>
-            <td>${pessoa.associado.membros}</td>
-        `;
-        lugar.appendChild(linha);
-    });
-}
+        destino.innerHTML = '';
 
-function cafe() {
-   fetch('dados.json')
-   .then(response=> response.json())
-   .then(dadinho =>{
-     document.getElementById('destino').innerHTML =
-     `<div class="card">
-     <img src="img/`+dadinho.imagem+`" alt="">
-     <h3>`+dadinho.nome+`</h3>
-     <p>` +dadinho.descricao+`</p>
-     <a href="`+dadinho.endereco+`">
-         <button type="button">Saiba Mais</button>
-       </a>
-    </div>`;
-   })
+        cafes.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            card.innerHTML = `
+            <img scr="img/${item.imagem}" alt="Foto de ${item.nome}">
+           <h3></h3>
+           <p></p>
+           <a href="${item.endereco}">
+             <button type="button">Saiba mais</button>
+           </a>
+           `;
+
+           card.querySelector('h3').textContent = item.nome;
+           card.querySelector('p').textContent = item.descricao;
+
+           destino.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Erro na requisição:',error);
+        destino.innerHTML = `<p>Desculpe, não foi possivel carregar as informações no momento.</p>`;
+    }
 }
