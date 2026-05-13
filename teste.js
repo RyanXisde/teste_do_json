@@ -1,32 +1,33 @@
-async function cafe(){
-    const destino = document.getElementById('destino')
-    try {
-        const response = await fetch('dados.json');
-        if (!response.ok) throw new Error('Falha ao carregar dadow');
-        const cafes = await response. json();
+function cafe() {
+    document.getElementById('destino').innerHTML = "<p>Dados prontos! Clique em 'Buscar Informações'.</p>";
+}
 
-        destino.innerHTML = '';
 
-        cafes.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card';
+function buscar_adm() {
+    fetch('dados.json')
+        .then(response => response.json())
+        .then(dados => {
+            const tbody = document.getElementById('lugar');
+            tbody.innerHTML = ""; 
 
-            card.innerHTML = `
-            <img scr="img/${item.imagem}" alt="Foto de ${item.nome}">
-           <h3></h3>
-           <p></p>
-           <a href="${item.endereco}">
-             <button type="button">Saiba mais</button>
-           </a>
-           `;
-
-           card.querySelector('h3').textContent = item.nome;
-           card.querySelector('p').textContent = item.descricao;
-
-           destino.appendChild(card);
+            dados.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${item.nome}</td>
+                    <td>${item.idade}</td>
+                    <td>${item.propriedade3}</td>
+                    <td>${item.propriedade4}</td>
+                    <td>${item.propriedade5}</td>
+                    <td>${item.propriedade6}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        })
+        .catch(error => {
+            console.error("Erro ao carregar dados:", error);
         });
-    } catch (error) {
-        console.error('Erro na requisição:',error);
-        destino.innerHTML = `<p>Desculpe, não foi possivel carregar as informações no momento.</p>`;
-    }
+}
+
+function botaun(){
+    alert("mds sla");
 }
